@@ -1,7 +1,10 @@
 var linkTest = "https://test.lalatv.com.vn";
 var linkApi = "https://test1.lalatv.com.vn";
-var storageLocation = "/storage/emulated/0/Android/data/com.nolyric.app/files/";
-var pathApp = `file://${storageLocation}`;
+var androidLocation = "/storage/emulated/0/Android/data/com.nolyric.app/files/";
+var iOSLocation = '/var/mobile/Applications/com.nolyric.app/Documents/';
+
+var pathApp = `file://${androidLocation}`;
+var pathIOS = `file://${iOSLocation}`;
 //file:///storage/emulated/0/Android/data/com.nolyric.app/files/1.mp3
 var wavesurfer;
 var currentSrc;
@@ -19,19 +22,6 @@ var userName = localStorage.getItem("userName");
 var roleName = localStorage.getItem("roleName");
 var configSelect2 = { theme: "dark-adminlte", width: "100%" };
 // region ======================= document ready =====================
-function encodeImageFileAsURL(obj) {
-  var file = obj.files[0];
-  var reader = new FileReader();
-  reader.onloadend = function () {
-    console.log('RESULT', reader.result)
-  }
-  reader.readAsDataURL(file);
-}
-$('#btnDownload').click(function () {
-    alert('start download')
-    alert(cordova.file.dataDirectory);
-    alert('done')
-});
 
 function playSong(id, title, actor, src) {
   currentSrc = linkTest + src;
@@ -85,9 +75,10 @@ $(document).ready(function () {
       $('#miniArtist').html(currentArtist);
       let fileName = srcAudio.substring(srcAudio.lastIndexOf('/') + 1);
       try {
-        window.resolveLocalFileSystemURL(pathApp + fileName, function () {
+        let filePath = (device.platform == "iOS" ? iOSLocation : androidLocation) + fileName;
+        window.resolveLocalFileSystemURL(filePath, function () {
           // Đã tồn tại file
-          $('#myAudio').attr('src', pathApp + fileName);
+          $('#myAudio').attr('src', filePath);
           // Đổi icon download thành icon downloaded
           $('#btnDownload').removeClass('fa-download').addClass('fa-check');
         }, function () {
@@ -131,7 +122,7 @@ $(document).ready(function () {
       // });
 
 
-      // // wavesurfer.load(storageLocation + '1.mp3');
+      // // wavesurfer.load(androidLocation + '1.mp3');
       // wavesurfer.load(src);
       // wavesurfer.play();
 
@@ -320,24 +311,21 @@ $(document).ready(function () {
     },
   }, "#btnSavePL");
   // Click Down
-  // $(document).on({
-  //   click: function () {
-  //     let fileName = currentSrc.substring(currentSrc.lastIndexOf('/') + 1);
-  //     window.resolveLocalFileSystemURL(pathApp + fileName, function () {
-  //     }, function () {
-  //       downloadFile(currentSrc);
-  //     });
-  //     currentFile = filename;
-  //   },
-  // }, "#btnDownload");
+  $(document).on({
+    click: function () {
+      let fileName = currentSrc.substring(currentSrc.lastIndexOf('/') + 1);
+      let filePath = (device.platform == "iOS" ? iOSLocation : androidLocation) + fileName;
+      window.resolveLocalFileSystemURL(filePath, function () {
+      }, function () {
+        // Chưa tồn tại, tiền hành download
+        downloadFile(currentSrc);
+      });
+      currentFile = filename;
+    },
+  }, "#btnDownload");
   function downloadFile(url) {
     let fileName = url.replace(/^.*[\\\/]/, '');
-    switch (device.platform) {
-      // case "Android": storageLocation = storageLocation; break;
-      case "iOS": storageLocation = cordova.file.documentsDirectory; break;
-    }
-    let filePath = storageLocation + fileName;
-    hcShowToast("Save file", filePath);
+    let filePath = (device.platform == "iOS" ? iOSLocation : androidLocation) + fileName;
     $('#btnDownload').toggleClass('fa-beat-fade');
     var fileTransfer = new FileTransfer();
     fileTransfer.download(encodeURI(url), filePath,
