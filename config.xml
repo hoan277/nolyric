@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.nolyric.app" android-versionCode="2" version="1.0.0"
+    xmlns="http://www.w3.org/ns/widgets"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>NoLyric</name>
+    <author email="chudinhhoan277@gmail.com" href="http://fb.com/chudinhhoan">Chu Đình Hoan</author>
+
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <allow-navigation href="*" />
+    <allow-navigation href="*" />
+    <allow-navigation href="http://*/*" />
+    <allow-navigation href="https://*/*" />
+    <allow-navigation href="data:*" />
+    <access origin="cdvfile://*" />
+    <!-- <engine name="cordova-ios" spec="5.1.1" /> -->
+    <plugin name="cordova-plugin-wkwebview-engine" spec="~1.2.1" />
+    <plugin name="cordova-plugin-wkwebview-file-xhr" spec="~2.1.4" />
+    <plugin name="cordova-plugin-signed-bundle" spec="0.1.0" />
+    <plugin name="cordova-plugin-device" spec="2.1.0" />
+    <plugin name="cordova-plugin-file" spec="7.0.0" />
+    <plugin name="cordova-plugin-media" />
+<!-- https://github.com/apache/cordova-plugin-device.git -->
+    <platform name="android">
+        <allow-intent href="market:*" />
+        <icon density="mdpi" height="57" platform="android" src="icon.png" width="57" />
+        <!-- <preference name="phonegap-version" value="cli-6.5.0" />
+        <preference name="android-minSdkVersion" value="24" />
+        <preference name="android-targetSdkVersion" value="30" /> -->
+        <preference name="android-installLocation" value="auto" />
+        <config-file parent="/manifest" target="app/src/main/AndroidManifest.xml">
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        </config-file>
+        <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+        <preference name="AndroidExtraFilesystems" value="sdcard,cache" />
+        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+        <preference name="AndroidExtraFilesystems" value="files-external,sdcard,files,documents,cache,cache-external,root" />
+        <!-- <preference name="signed_bundle_keystore_path" value="hoan.keystore" />
+        <preference name="signed_bundle_keystore_alias" value="hoan" /> -->
+    </platform>
+    <platform name="ios">
+        <preference name="iosPersistentFileLocation" value="Library" />
+        <preference name="iosPersistentFileLocation" value="Compatibility" />
+        <preference name="AllowUntrustedCerts" value="on" />
+        <preference name="InterceptRemoteRequests" value="all" />
+        <preference name="NativeXHRLogging" value="full" />
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+        <preference name="WKWebViewOnly" value="true" />
+        <config-file parent="NSLocationAlwaysAndWhenInUseUsageDescription" target="*-Info.plist">
+            <string>Background location tracking is required to notify you when you enter a location offering deals</string>
+        </config-file>
+        <config-file parent="NSLocationAlwaysUsageDescription" target="*-Info.plist">
+            <string>Background location tracking is required to notify you when you enter a location offering deals</string>
+        </config-file>
+        <config-file parent="NSLocationWhenInUseUsageDescription" target="*-Info.plist">
+            <string>Background location tracking is required to notify you when you enter a location offering deals</string>
+        </config-file>
+        <config-file parent="NSMotionUsageDescription" target="*-Info.plist">
+            <string>Device motion updates help determine when the device is stationary so the app can save power by turning off location-updates</string>
+        </config-file>
+    </platform>
+    <preference name="Fullscreen" value="false" />
+    <preference name="AndroidLaunchMode" value="singleInstance" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="xwalkMultipleApk" value="true" />
+    <preference name="AndroidInsecureFileModeEnabled" value="true" />
+    <preference name="Orientation" value="portrait" />
+    <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root" />
+    <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external,assets,root" />
+    <!-- <preference name="scheme" value="http" />
+    <preference name="hostname" value="localhost" /> -->
+
+</widget>

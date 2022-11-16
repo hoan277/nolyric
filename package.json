@@ -1,0 +1,48 @@
+{
+  "name": "com.nolyric.app",
+  "displayName": "NoLyric",
+  "version": "1.0.0",
+  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "Apache Cordova Team",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "cordova-android": "^10.1.2",
+    "cordova-ios": "5.1.1",
+    "cordova-plugin-file": "^7.0.0",
+    "cordova-plugin-signed-bundle": "0.1.0",
+    "cordova-plugin-wkwebview-engine": "~1.2.1",
+    "cordova-plugin-wkwebview-file-xhr": "~2.1.4",
+    "cordova-": "7.0.0",
+    "cordova-plugin-device": "2.1.0"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-file": {},
+      "cordova-plugin-wkwebview-engine": {},
+      "cordova-plugin-wkwebview-file-xhr": {},
+      "cordova-plugin-signed-bundle": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-file-transfer": {},
+      "cordova-plugin-camera": {
+        "ANDROIDX_CORE_VERSION": "1.6.+"
+      },
+      "cordova-plugin-media": {}
+    },
+    "platforms": [
+      "cordova-ios",
+      "cordova-plugin-file",
+      "",
+      "cordova-plugin-device",
+      "android",
+      "ios"
+    ]
+  },
+  "dependencies": {}
+}
